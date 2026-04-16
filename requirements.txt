@@ -1,0 +1,5 @@
+toolbox @ git+https://github.com/Valcrist/toolbox.git
+numpy
+pillow
+imagehash
+scikit-image

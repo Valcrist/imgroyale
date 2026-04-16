@@ -173,3 +173,7 @@ CLAUDE.md
 test.py
 test_*.py
 test-*.py
+
+out/
+scratch/
+test/
