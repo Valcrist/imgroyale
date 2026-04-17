@@ -9,12 +9,12 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/github/v/tag/Valcrist/imgroyale?style=flat&label=version&color=green" alt="Version"></a>
+  <a href="#"><img src="https://img.shields.io/github/v/tag/Valcrist/imgroyale?style=flat&label=version&color=brightgreen" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-polyform--nc-orange?style=flat" alt="License"></a>
   <a href="#"><img src="https://img.shields.io/github/languages/top/Valcrist/imgroyale?style=flat" alt="Top Language"></a>
   <a href="https://peps.python.org/pep-0008/"><img src="https://img.shields.io/badge/code%20style-pep8-73e?style=flat" alt="Code Style"></a>
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/req:python-3.10%2B-c47?style=flat" alt="Python Version"></a>
-  <a href="https://github.com/Valcrist/imgroyale/activity"><img src="https://img.shields.io/badge/status-active-brightgreen?style=flat" alt="Status"></a>
+  <a href="https://github.com/Valcrist/imgroyale/activity"><img src="https://img.shields.io/badge/status-active-green?style=flat" alt="Status"></a>
 </p>
 
 ---
