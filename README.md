@@ -9,9 +9,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Valcrist/imgroyale/stargazers"><img src="https://img.shields.io/github/stars/Valcrist/imgroyale?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/Valcrist/imgroyale/commits/main"><img src="https://img.shields.io/github/last-commit/Valcrist/imgroyale?style=flat" alt="Last Commit"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-PolyForm-orange?style=flat" alt="License"></a>
+  <a href="#"><img src="https://img.shields.io/github/v/tag/Valcrist/imgroyale?style=flat&label=version&color=green" alt="Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-polyform--nc-orange?style=flat" alt="License"></a>
+  <a href="#"><img src="https://img.shields.io/github/languages/top/Valcrist/imgroyale?style=flat" alt="Top Language"></a>
+  <a href="https://peps.python.org/pep-0008/"><img src="https://img.shields.io/badge/code%20style-pep8-73e?style=flat" alt="Code Style"></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/req:python-3.10%2B-c47?style=flat" alt="Python Version"></a>
+  <a href="https://github.com/Valcrist/imgroyale/activity"><img src="https://img.shields.io/badge/status-active-brightgreen?style=flat" alt="Status"></a>
 </p>
 
 ---
@@ -81,5 +84,5 @@ best = pick_best("a.webp", "b.webp")
 
 - Python 3.10+
 - `numpy`, `pillow`, `imagehash`, `scikit-image`
-- [`toolbox`](https://github.com/Valcrist/toolbox)
+- [`imgroyale`](https://github.com/Valcrist/imgroyale)
 
