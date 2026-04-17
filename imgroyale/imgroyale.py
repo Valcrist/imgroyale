@@ -1,9 +1,19 @@
-import os
 import imagehash
 import numpy as np
 from PIL import Image
 from skimage.metrics import peak_signal_noise_ratio as psnr, mean_squared_error
-from toolbox.fs import slash_nix, create_path, copy
+from toolbox.fs import (
+    slash_nix,
+    path_exists,
+    barename,
+    dirname,
+    join_path,
+    normpath,
+    is_dir,
+    list_dir,
+    copy,
+    delete,
+)
 from toolbox.exceptions import ToolboxError, ToolboxWarning
 from toolbox.utils import debug
 
@@ -23,11 +33,11 @@ def to_webp(
 ) -> str:
     """Convert an image to WebP. Returns the output path on success."""
     try:
-        if not os.path.exists(src):
+        if not path_exists(src):
             raise ImgRoyaleError(f"Missing image: {src}")
-        base = os.path.splitext(os.path.basename(src))[0]
-        dst_dir = out_dir if out_dir else os.path.dirname(src)
-        dst = slash_nix(os.path.join(dst_dir, base + ".webp"))
+        base = barename(src)
+        dst_dir = out_dir if out_dir else dirname(src)
+        dst = slash_nix(join_path(dst_dir, base + ".webp"))
         with Image.open(src) as img:
             if img.format == "WEBP":
                 debug(f"{src} already WebP", "Conversion skipped", lvl=2)
@@ -52,7 +62,7 @@ def perceptual_hash(img: str) -> str:
     across different source modes. Returns the hash as a hex string.
     """
     try:
-        if not os.path.exists(img):
+        if not path_exists(img):
             raise ImgRoyaleError(f"Missing image to hash: {img}")
         with Image.open(img) as image:
             if image.mode != "RGB":
@@ -126,9 +136,9 @@ def pick_best(img1: str, img2: str) -> str:
     Returns img1 if img1 is better, img2 otherwise.
     """
     try:
-        if not os.path.exists(img1):
+        if not path_exists(img1):
             raise ImgRoyaleError(f"Image does not exist: {img1}")
-        if not os.path.exists(img2):
+        if not path_exists(img2):
             return img1
 
         debug(f"{img1} vs {img2} ..", "Comparing", lvl=2)
@@ -186,10 +196,10 @@ def save_best(src: str, dst: str) -> bool:
     Returns True on success.
     """
     try:
-        if not os.path.exists(src):
+        if not path_exists(src):
             raise ImgRoyaleError(f"Source image does not exist: {src}")
 
-        if not os.path.exists(dst):
+        if not path_exists(dst):
             debug(dst, "New image; nothing to compare")
             success = copy(src, dst)
             if not success:
@@ -222,22 +232,16 @@ def dedupe_image(
     the copy step fails.
     """
     try:
-        if not os.path.exists(in_file):
+        if not path_exists(in_file):
             raise ImgRoyaleError(f"Missing image source: {in_file}")
-        create_path(out_dir)
-        create_path(scratch_dir)
         webp = slash_nix(to_webp(in_file, out_dir=scratch_dir))
         phash = perceptual_hash(webp)
-        dst_path = slash_nix(os.path.join(out_dir, f"{format_hash(phash)}.webp"))
+        dst_path = slash_nix(join_path(out_dir, f"{format_hash(phash)}.webp"))
         success = save_best(webp, dst_path)
-        if os.path.dirname(webp) == slash_nix(os.path.normpath(scratch_dir)):
-            os.remove(webp)
-        if (
-            del_scratch_dir
-            and os.path.isdir(scratch_dir)
-            and not os.listdir(scratch_dir)
-        ):
-            os.rmdir(scratch_dir)
+        if dirname(webp) == slash_nix(normpath(scratch_dir)):
+            delete(webp)
+        if del_scratch_dir and is_dir(scratch_dir) and not list_dir(scratch_dir):
+            delete(scratch_dir)
         if not success:
             raise ImgRoyaleWarning(f"Failed to save best image in: {dst_path}")
         return dst_path

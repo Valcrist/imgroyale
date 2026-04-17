@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="imgroyale",
-    version="0.1.0",
+    version="0.1.1",
     packages=find_packages(),
     python_requires=">=3.10",
     install_requires=[
