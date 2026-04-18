@@ -40,14 +40,14 @@ def to_webp(
         dst = slash_nix(join_path(dst_dir, base + ".webp"))
         with Image.open(src) as img:
             if img.format == "WEBP":
-                debug(f"{src} already WebP", "Conversion skipped", lvl=2)
+                debug(f"{src} already WebP", "Conversion skipped", lvl=3)
                 return src
             if img.mode not in ("RGB", "RGBA"):
                 img = img.convert(
                     "RGBA" if img.mode in ("P", "PA", "LA", "L") else "RGB"
                 )
             img.save(dst, format="WEBP", lossless=quality == 100, quality=quality)
-        debug(f"{src} -> {dst}", "Converted to webp", lvl=2)
+        debug(f"{src} -> {dst}", "Converted to webp", lvl=3)
         return dst
     except ImgRoyaleError:
         raise
@@ -141,7 +141,7 @@ def pick_best(img1: str, img2: str) -> str:
         if not path_exists(img2):
             return img1
 
-        debug(f"{img1} vs {img2} ..", "Comparing", lvl=2)
+        debug(f"{img1} vs {img2} ..", "Comparing", lvl=3)
         with Image.open(img1) as img1_file, Image.open(img2) as img2_file:
             img1_size = get_image_size(img1_file)
             img2_size = get_image_size(img2_file)
@@ -151,7 +151,7 @@ def pick_best(img1: str, img2: str) -> str:
                         f"img1 has better resolution : "
                         f"img1={img1_size} vs img2={img2_size}",
                         "Comparison result",
-                        lvl=2,
+                        lvl=3,
                     )
                     return img1
                 else:
@@ -159,7 +159,7 @@ def pick_best(img1: str, img2: str) -> str:
                         f"img2 has better resolution : "
                         f"img1={img1_size} vs img2={img2_size}",
                         "Comparison result",
-                        lvl=2,
+                        lvl=3,
                     )
                     return img2
 
@@ -169,7 +169,7 @@ def pick_best(img1: str, img2: str) -> str:
                     f"img1 has higher PSNR : "
                     f"img1={psnr_img1:.2f} vs img2={psnr_img2:.2f}",
                     "Comparison result",
-                    lvl=2,
+                    lvl=3,
                 )
                 return img1
             else:
@@ -178,7 +178,7 @@ def pick_best(img1: str, img2: str) -> str:
                     f"img2 has {comparison} PSNR : "
                     f"img1={psnr_img1:.2f} vs img2={psnr_img2:.2f}",
                     "Comparison result",
-                    lvl=2,
+                    lvl=3,
                 )
                 return img2
 
