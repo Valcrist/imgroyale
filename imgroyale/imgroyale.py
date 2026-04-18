@@ -200,7 +200,7 @@ def save_best(src: str, dst: str) -> bool:
             raise ImgRoyaleError(f"Source image does not exist: {src}")
 
         if not path_exists(dst):
-            debug(dst, "New image; nothing to compare")
+            debug(dst, "New image; nothing to compare", lvl=3)
             success = copy(src, dst)
             if not success:
                 raise ImgRoyaleError(f"Failed to copy: {src} to {dst}")
